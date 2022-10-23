@@ -18,6 +18,11 @@ public struct AppBuilder: View {
    }
 
  public var body: some View {
-      initRoute!.view
+    NavigationStack {
+       initRoute!.view
+    }
+    .navigationDestination(for: PageRouteInfo.self) { routeInfo in
+       routeInfo.view
+    }
    }
 }

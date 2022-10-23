@@ -1,7 +1,7 @@
 public struct StackNavigator {
-    public private(set) var text = "Private testing!"
     public let appBuilder : AppBuilder
     public init(routes : [PageRouteInfo]) {
+      assert(!routes.isEmpty, "Please provide atleast single page")
       appBuilder = AppBuilder(routes: routes)
     }
 }

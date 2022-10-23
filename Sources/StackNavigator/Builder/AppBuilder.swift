@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AppBuilder: View {
+public struct AppBuilder: View {
    let routes: [PageRouteInfo]
    let initRoute: PageRouteInfo?
 
@@ -17,7 +17,7 @@ struct AppBuilder: View {
       assert(initRoute != nil, "Initial route has not been provided.")
    }
 
-   var body: some View {
+ public var body: some View {
       initRoute!.view
    }
 }

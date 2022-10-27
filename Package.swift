@@ -27,6 +27,9 @@ let package = Package(
             name: "StackNavigator",
             dependencies: []
         ),
+        .target(
+         name: "AppBuilder"
+        ),
 
         .testTarget(
             name: "StackNavigatorTests",

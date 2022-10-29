@@ -25,7 +25,7 @@ public class NavigationHandler: ObservableObject {
       if let route { stack.append(route) }
    }
 
-   func replaceRoute(name: String) {
+ public func replaceRoute(name: String) {
       let route = findRouteByName(name)
       if let route {
          withAnimation {

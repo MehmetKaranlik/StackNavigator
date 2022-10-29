@@ -19,6 +19,4 @@ public struct PageRouteInfo : Hashable, Equatable {
    let view: AnyView
    let name: String
    let isInitial: Bool
-
-
 }

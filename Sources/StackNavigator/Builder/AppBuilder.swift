@@ -8,21 +8,23 @@
 import SwiftUI
 
 public struct AppBuilder: View {
-   let routes: [PageRouteInfo]
-   let initRoute: PageRouteInfo?
 
- public  init(routes: [PageRouteInfo]) {
-      self.routes = routes
-      initRoute = routes.first(where: { $0.isInitial })
-      assert(initRoute != nil, "Initial route has not been provided.")
+   @ObservedObject var navigationHandler : NavigationHandler
+
+ public init(routes: [PageRouteInfo]) {
+     navigationHandler = NavigationHandler(routes: routes)
    }
 
  public var body: some View {
-    NavigationStack {
-       initRoute!.view
-    }
-    .navigationDestination(for: PageRouteInfo.self) { routeInfo in
-       routeInfo.view
+    NavigationStack(path:$navigationHandler.stack) {
+       ZStack {
+          ForEach(self.navigationHandler.singularRouteStack, id:\.self) { rootView in
+             rootView.view
+          } .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .identity))
+       }
+       .navigationDestination(for: PageRouteInfo.self) { routeInfo in
+          routeInfo.view
+       }
     }
    }
 }

@@ -26,5 +26,6 @@ public struct AppBuilder: View {
           routeInfo.view
        }
     }
+    .environmentObject(navigationHandler)
    }
 }

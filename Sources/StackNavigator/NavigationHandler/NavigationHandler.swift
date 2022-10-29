@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUI
 
-class NavigationHandler: ObservableObject {
+public class NavigationHandler: ObservableObject {
    let routes : [PageRouteInfo]
    @Published var stack: [PageRouteInfo] = []
    @Published var singularRouteStack : [PageRouteInfo] = []
 
-   init(routes: [PageRouteInfo]) {
+    init(routes: [PageRouteInfo]) {
       self.routes = routes
       singularRouteStack.append(
          routes.first(where: {$0.isInitial == true})!

@@ -10,8 +10,8 @@ import SwiftUI
 
 public class NavigationHandler: ObservableObject {
    let routes: [PageRouteInfo]
-   @Published var stack: [PageRouteInfo] = []
-   @Published var singularRouteStack: [PageRouteInfo] = []
+   @Published var stack: [PageRouteInfo] = [] // Push stack
+   @Published var singularRouteStack: [PageRouteInfo] = [] // Root stack
 
  public init(routes: [PageRouteInfo]) {
       self.routes = routes
@@ -20,12 +20,28 @@ public class NavigationHandler: ObservableObject {
       )
    }
 
-   func pushNamed(name: String) {
+  public func pushNamed(name: String) {
       let route = findRouteByName(name)
       if let route { stack.append(route) }
    }
 
- public func replaceRoute(name: String) {
+
+
+   public func pop(_ args:Any?) -> Any? {
+      stack.removeLast()
+      return args
+   }
+
+
+   public func popUntil(name:String, args:Any?) -> Any? {
+      while stack.last?.name != name {
+         stack.removeLast()
+      }
+      return args
+   }
+
+
+   public func replaceRootNamed(name: String) {
       let route = findRouteByName(name)
       if let route {
          withAnimation {
@@ -35,7 +51,28 @@ public class NavigationHandler: ObservableObject {
       }
    }
 
+   public func replaceRouteNamed(name : String) {
+      let route = findRouteByName(name)
+      if let route {
+         stack.append(route)
+         stack.remove(at: stack.index(before: stack.count - 1))
+      }
+   }
+
+
+   public func pushRemoveUntil(name: String) {
+      let route = findRouteByName(name)
+      if let route {
+         stack.append(route)
+         stack.removeAll {  $0.name != name   }
+      }
+   }
+
+
    private func findRouteByName(_ name: String) -> PageRouteInfo? {
       return routes.first(where: { $0.name == name })
    }
 }
+
+
+

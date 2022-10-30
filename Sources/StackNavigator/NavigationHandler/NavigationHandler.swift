@@ -40,6 +40,11 @@ public class NavigationHandler: ObservableObject {
       return args
    }
 
+   public func popToRoot(_ args:Any?)-> Any? {
+      stack.removeAll()
+      return args
+   }
+
 
    public func replaceRootNamed(name: String) {
       let route = findRouteByName(name)
@@ -63,8 +68,8 @@ public class NavigationHandler: ObservableObject {
    public func pushRemoveUntil(name: String) {
       let route = findRouteByName(name)
       if let route {
-         stack.append(route)
-         stack.removeAll {  $0.name != name   }
+         popToRoot(nil)
+         replaceRootNamed(name: route.name)
       }
    }
 

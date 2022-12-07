@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+@available(macOS 13.0, *)
 public class NavigationHandler: ObservableObject {
    let routes: [PageRouteInfo]
    @Published var stack: [PageRouteInfo] = [] // Push stack

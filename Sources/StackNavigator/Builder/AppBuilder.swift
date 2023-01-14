@@ -12,7 +12,7 @@ public struct AppBuilder: View {
 
    @ObservedObject var navigationHandler : NavigationHandler
 
- public init(routes: [PageRouteInfo]) {
+   public init(routes: [PageRouteInfo]) {
      navigationHandler = NavigationHandler(routes: routes)
    }
 

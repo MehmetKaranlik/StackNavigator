@@ -14,15 +14,20 @@ public class NavigationHandler: ObservableObject {
    @Published var stack: [PageRouteInfo] = [] // Push stack
    @Published var singularRouteStack: [PageRouteInfo] = [] // Root stack
 
- public init(routes: [PageRouteInfo]) {
+   public init(routes: [PageRouteInfo]) {
       self.routes = routes
       singularRouteStack.append(
          routes.first(where: { $0.isInitial == true })!
       )
    }
 
-  public func pushNamed(name: String) {
-      let route = findRouteByName(name)
+   public func pushNamed(name: String, args : Arguments?) {
+      var route = findRouteByName(name)
+      if let args {
+         let argumented = route?.withArgs(args: args)
+         if let argumented {  stack.append(argumented) }
+         return
+      }
       if let route { stack.append(route) }
    }
 
@@ -47,7 +52,7 @@ public class NavigationHandler: ObservableObject {
    }
 
 
-   public func replaceRootNamed(name: String) {
+   public func replaceRootNamed(name: String, args:Arguments?) {
       let route = findRouteByName(name)
       if let route {
          withAnimation {
@@ -57,7 +62,7 @@ public class NavigationHandler: ObservableObject {
       }
    }
 
-   public func replaceRouteNamed(name : String) {
+   public func replaceRouteNamed(name : String, args:Arguments?) {
       let route = findRouteByName(name)
       if let route {
          stack.append(route)
@@ -66,11 +71,13 @@ public class NavigationHandler: ObservableObject {
    }
 
 
-   public func pushRemoveUntil(name: String) {
+   public func pushRemoveUntil(name: String, args:Arguments?) {
       let route = findRouteByName(name)
       if let route {
          popToRoot(nil)
-         replaceRootNamed(name: route.name)
+         replaceRootNamed(name: route.name,args: args)
+
+      
       }
    }
 

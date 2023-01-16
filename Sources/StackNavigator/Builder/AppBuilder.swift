@@ -20,11 +20,12 @@ public struct AppBuilder: View {
     NavigationStack(path:$navigationHandler.stack) {
        ZStack {
           ForEach(self.navigationHandler.singularRouteStack, id:\.self) { rootView in
-             rootView.view
+             EmptyView()
           } .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .identity))
        }
        .navigationDestination(for: PageRouteInfo.self) { routeInfo in
           routeInfo.view
+             .navigationBarBackButtonHidden(routeInfo.isInitial && navigationHandler.stack.first == routeInfo)
        }
     }
     .environmentObject(navigationHandler)

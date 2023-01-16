@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4673CEE32974D83D004C4E74 /* StackNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 4673CEE22974D83D004C4E74 /* StackNavigator */; };
 		4684D1862972C6320058DDE9 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684D1852972C6320058DDE9 /* ExampleApp.swift */; };
 		4684D1882972C6320058DDE9 /* ViewOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684D1872972C6320058DDE9 /* ViewOne.swift */; };
 		4684D18A2972C6330058DDE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4684D1892972C6330058DDE9 /* Assets.xcassets */; };
 		4684D18D2972C6330058DDE9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4684D18C2972C6330058DDE9 /* Preview Assets.xcassets */; };
-		4684D1972972C67A0058DDE9 /* StackNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 4684D1962972C67A0058DDE9 /* StackNavigator */; };
 		4684D1992972C6CC0058DDE9 /* ViewTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684D1982972C6CC0058DDE9 /* ViewTwo.swift */; };
 		4684D19B2972C6DA0058DDE9 /* ViewThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684D19A2972C6DA0058DDE9 /* ViewThree.swift */; };
 		4684D19D2972C6FB0058DDE9 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4684D19C2972C6FB0058DDE9 /* Routes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4673CEE12974D81A004C4E74 /* StackNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StackNavigator; path = ..; sourceTree = "<group>"; };
 		4684D1822972C6320058DDE9 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4684D1852972C6320058DDE9 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		4684D1872972C6320058DDE9 /* ViewOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOne.swift; sourceTree = "<group>"; };
 		4684D1892972C6330058DDE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4684D18C2972C6330058DDE9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		4684D1942972C6570058DDE9 /* StackNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StackNavigator; path = ..; sourceTree = "<group>"; };
 		4684D1982972C6CC0058DDE9 /* ViewTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTwo.swift; sourceTree = "<group>"; };
 		4684D19A2972C6DA0058DDE9 /* ViewThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewThree.swift; sourceTree = "<group>"; };
 		4684D19C2972C6FB0058DDE9 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
@@ -34,7 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4684D1972972C67A0058DDE9 /* StackNavigator in Frameworks */,
+				4673CEE32974D83D004C4E74 /* StackNavigator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +84,7 @@
 		4684D1932972C6570058DDE9 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				4684D1942972C6570058DDE9 /* StackNavigator */,
+				4673CEE12974D81A004C4E74 /* StackNavigator */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -113,7 +113,7 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				4684D1962972C67A0058DDE9 /* StackNavigator */,
+				4673CEE22974D83D004C4E74 /* StackNavigator */,
 			);
 			productName = Example;
 			productReference = 4684D1822972C6320058DDE9 /* Example.app */;
@@ -376,7 +376,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4684D1962972C67A0058DDE9 /* StackNavigator */ = {
+		4673CEE22974D83D004C4E74 /* StackNavigator */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = StackNavigator;
 		};

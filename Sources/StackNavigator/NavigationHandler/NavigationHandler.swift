@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+
 @available(macOS 13.0, *)
 public class NavigationHandler: ObservableObject {
    let routes: [PageRouteInfo]
@@ -16,19 +17,18 @@ public class NavigationHandler: ObservableObject {
 
    public init(routes: [PageRouteInfo]) {
       self.routes = routes
-      singularRouteStack.append(
+      stack.append(
          routes.first(where: { $0.isInitial == true })!
       )
    }
 
    public func pushNamed(name: String, args : Arguments?) {
-      var route = findRouteByName(name)
-      if let args {
-         let argumented = route?.withArgs(args: args)
-         if let argumented {  stack.append(argumented) }
-         return
+      let route = findRouteByName(name)
+      if let route {
+        let finalRoute = matchArgument(route: route, args: args)
+        stack.append(finalRoute)
       }
-      if let route { stack.append(route) }
+
    }
 
 
@@ -47,7 +47,9 @@ public class NavigationHandler: ObservableObject {
    }
 
    public func popToRoot(_ args:Any?)-> Any? {
-      stack.removeAll()
+      stack.removeAll { route in
+         route != stack.first
+      }
       return args
    }
 
@@ -55,32 +57,55 @@ public class NavigationHandler: ObservableObject {
    public func replaceRootNamed(name: String, args:Arguments?) {
       let route = findRouteByName(name)
       if let route {
-         withAnimation {
-            singularRouteStack.append(route)
-            singularRouteStack.remove(at: 0)
+         var finalRoute = matchArgument(route: route, args: args)
+         if stack.count > 1 {
+            stack.replaceSubrange(0...0, with: [finalRoute.makeFirst()])
+         }else {
+            pushRemoveUntil(name: finalRoute.name, args: finalRoute.args)
          }
+
       }
    }
 
-   public func replaceRouteNamed(name : String, args:Arguments?) {
-      let route = findRouteByName(name)
-      if let route {
-         stack.append(route)
-         stack.remove(at: stack.index(before: stack.count - 1))
-      }
-   }
 
 
    public func pushRemoveUntil(name: String, args:Arguments?) {
       let route = findRouteByName(name)
       if let route {
-         popToRoot(nil)
-         replaceRootNamed(name: route.name,args: args)
+         var finalRoute = matchArgument(route: route, args: args)
+         stack.append(finalRoute.makeFirst())
+         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.stack.removeSubrange(self.rangeWithoutLastItem)
+            print(self.stack)
+         }
 
       
       }
    }
 
+
+
+
+
+   var maxRange : ClosedRange<Int> {
+      return 1...(stack.count - 1)
+   }
+
+   var rangeWithoutLastItem : ClosedRange<Int> {
+      return 0...(stack.count - 2)
+   }
+
+   var indexBeforeLast : Int {
+      return stack.index(before: stack.count - 1)
+   }
+
+
+   private func matchArgument(route : PageRouteInfo, args: Arguments?) -> PageRouteInfo {
+      if args == nil { return route }
+      var new = route
+      let argumented = new.withArgs(args: args!)
+      return argumented
+   }
 
    private func findRouteByName(_ name: String) -> PageRouteInfo? {
       return routes.first(where: { $0.name == name })

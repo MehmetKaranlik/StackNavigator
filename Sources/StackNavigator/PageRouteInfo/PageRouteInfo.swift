@@ -55,7 +55,7 @@ public struct PageRouteInfo : Hashable, Equatable {
 
 
    public static func == (lhs: PageRouteInfo, rhs: PageRouteInfo) -> Bool {
-      lhs.name == rhs.name
+      lhs.hashValue == rhs.hashValue
    }
 
    public func hash(into hasher: inout Hasher) {
@@ -68,9 +68,15 @@ public struct PageRouteInfo : Hashable, Equatable {
       try? typeCheck(args: args)
       self.args = args
       self.view = AnyView(routeBuilder(args))
-
-     
       return self
+   }
+
+   public mutating func makeFirst() -> PageRouteInfo {
+      if let args {
+      return PageRouteInfo(build: routeBuilder, name: name, isInitial: true, args: args)
+      }
+      return PageRouteInfo(build: routeBuilder, name: name, isInitial: true)
+
    }
 
    var view: AnyView
@@ -78,6 +84,10 @@ public struct PageRouteInfo : Hashable, Equatable {
    let isInitial: Bool
    var args : Arguments?
    let routeBuilder : ArgumentedBuilder
+
+   var isHiddenBack : Bool {
+      return isInitial
+   }
 
 }
 

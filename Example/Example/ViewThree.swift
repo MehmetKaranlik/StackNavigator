@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
-
+import StackNavigator
 struct ViewThree: View {
+   @EnvironmentObject var navigationHandler : NavigationHandler
     var body: some View {
         Text("View 3")
+          .onTapGesture {
+             navigationHandler.replaceRootNamed(name: Routes.RouteNames.viewOne.rawValue, args: nil)
+          }
+
           
     }
 }

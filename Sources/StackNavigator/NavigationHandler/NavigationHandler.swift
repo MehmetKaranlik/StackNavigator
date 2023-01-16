@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+@available(iOS 16.0, *)
 @available(macOS 13.0, *)
 public class NavigationHandler: Navigator {
    @Published public var stack: [PageRouteInfo] = [] {
@@ -81,7 +82,7 @@ private extension NavigationHandler {
    }
 }
 
-extension NavigationHandler {
+private extension NavigationHandler {
    func withDelay(_ callback: @escaping () -> ()) {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
          callback()

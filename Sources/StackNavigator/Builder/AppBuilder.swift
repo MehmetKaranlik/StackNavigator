@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 16, *)
 @available(macOS 13.0, *)
 public struct AppBuilder: View {
 

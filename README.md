@@ -1,3 +1,5 @@
 # StackNavigator
 
-A description of this package.
+***Declarative SwiftUI Navigation Package***
+
+- Early in development

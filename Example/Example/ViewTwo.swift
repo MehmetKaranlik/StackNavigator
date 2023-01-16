@@ -10,12 +10,29 @@ import StackNavigator
 
 struct ViewTwo: View {
    let id : String
-   @EnvironmentObject var navigationManager : NavigationHandler
+
+   @EnvironmentObject var navManager : NavigationHandler
     var body: some View {
-        Text(id + "BU BIR ARGUMAN OLARAK ALINMIŞTIR")
-          .onTapGesture {
-             navigationManager.pushRemoveUntil(name: Routes.RouteNames.viewThree.rawValue,args: nil)
+       VStack(spacing: 20) {
+          Text("View 2")
+
+
+          List {
+             Text("Argument from navigation : \(id)")
+             Button("Push To 3") {
+                navManager.push(destionation: RouteNames.viewThree)
+             }
+             Button("Replace root with 3") {
+                navManager.replaceRoot(with: RouteNames.viewThree)
+             }
+             Button("Push 4 and remove all") {
+                navManager.pushAndRemoveUntil(destionation: RouteNames.viewFour)
+             }
+             Button("Pop back if possible") {
+                navManager.pop()
+             }
           }
+       }
     }
 }
 

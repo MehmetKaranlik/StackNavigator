@@ -8,12 +8,25 @@
 import SwiftUI
 import StackNavigator
 struct ViewThree: View {
-   @EnvironmentObject var navigationHandler : NavigationHandler
+   @EnvironmentObject var navManager : NavigationHandler
     var body: some View {
-        Text("View 3")
-          .onTapGesture {
-             navigationHandler.replaceRootNamed(name: Routes.RouteNames.viewOne.rawValue, args: nil)
+       VStack(spacing:20) {
+          Text("View 3")
+          List {
+             Button("Push To 4") {
+                navManager.push(destionation: RouteNames.viewFour)
+             }
+             Button("Replace root with 3") {
+                navManager.replaceRoot(with: RouteNames.viewThree)
+             }
+             Button("Push 4 and remove all") {
+                navManager.pushAndRemoveUntil(destionation: RouteNames.viewFour)
+             }
+             Button("Pop back if possible") {
+                navManager.pop()
+             }
           }
+       }
 
           
     }

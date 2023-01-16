@@ -1,26 +1,20 @@
 //
-//  ContentView.swift
+//  ViewFour.swift
 //  Example
 //
-//  Created by mehmet karanlık on 14.01.2023.
+//  Created by mehmet karanlık on 16.01.2023.
 //
 
 import SwiftUI
 import StackNavigator
-
-
-struct ViewOne: View {
-
+struct ViewFour: View {
    @EnvironmentObject var navManager : NavigationHandler
     var body: some View {
-       VStack(spacing: 20) {
-
-          Text("View 1")
-
+       VStack(spacing:20) {
+          Text("View 4")
           List {
-            
-             Button("Push To 2") {
-                navManager.push(destionation: RouteNames.viewTwo(id: "Came from 4"))
+             Button("Push To 1") {
+                navManager.push(destionation: RouteNames.viewOne)
              }
              Button("Replace root with 3") {
                 navManager.replaceRoot(with: RouteNames.viewThree)
@@ -28,22 +22,16 @@ struct ViewOne: View {
              Button("Push 4 and remove all") {
                 navManager.pushAndRemoveUntil(destionation: RouteNames.viewFour)
              }
-             Button("Pop back if possible") {
-                navManager.pop()
+             Button("Pop to Root") {
+                navManager.popToRoot()
              }
           }
-
-
-
-
-        }
-        .padding()
-
+       }
     }
 }
 
-struct ViewOne_Previews: PreviewProvider {
+struct ViewFour_Previews: PreviewProvider {
     static var previews: some View {
-       ViewOne()
+        ViewFour()
     }
 }

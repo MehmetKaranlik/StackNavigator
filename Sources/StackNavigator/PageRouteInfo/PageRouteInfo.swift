@@ -11,47 +11,22 @@ public typealias Arguments = [String:Any?]
 public typealias ArgumentedBuilder = (_ args : Arguments?) -> any View
 
 @available(macOS 13.0, *)
-public struct PageRouteInfo : Hashable, Equatable {
+public struct PageRouteInfo : Hashable {
 
+   let view: any View
+   let isInitial: Bool
+   let id : String = UUID().uuidString
+   
 
-
-   public init(build : @escaping ArgumentedBuilder, name: String, args : Arguments) {
-      self.routeBuilder = build
-      self.name = name
+   public init( view: any View) {
+      self.view = view
       self.isInitial = false
-      self.args = args
-      self.view = AnyView(self.routeBuilder(self.args))
-
    }
 
-   public init(build : @escaping ArgumentedBuilder, name: String) {
-      self.name = name
-      self.isInitial = false
-      self.args = nil
-      self.routeBuilder = build
-      self.view = AnyView(build(self.args))
-   }
-
-   public init(build : @escaping ArgumentedBuilder, name : String, isInitial : Bool, args : Arguments) {
-      self.name = name
+   public init(view: any View, isInitial : Bool) {
+      self.view = view
       self.isInitial = isInitial
-      self.args = args
-      self.routeBuilder = build
-      self.view = AnyView(build(self.args))
-
    }
-
-
-   public init(build : @escaping ArgumentedBuilder, name : String, isInitial : Bool) {
-
-      self.name = name
-      self.isInitial = isInitial
-      self.args = nil
-      self.routeBuilder = build
-      self.view = AnyView(build(self.args))
-
-   }
-
 
 
    public static func == (lhs: PageRouteInfo, rhs: PageRouteInfo) -> Bool {
@@ -59,31 +34,17 @@ public struct PageRouteInfo : Hashable, Equatable {
    }
 
    public func hash(into hasher: inout Hasher) {
-     hasher.finalize()
+      hasher.combine(id)
    }
 
 
-   public mutating func withArgs(args:Arguments?) -> PageRouteInfo {
-      guard let args else { return self }
-      try? typeCheck(args: args)
-      self.args = args
-      self.view = AnyView(routeBuilder(args))
-      return self
-   }
 
    public mutating func makeFirst() -> PageRouteInfo {
-      if let args {
-      return PageRouteInfo(build: routeBuilder, name: name, isInitial: true, args: args)
-      }
-      return PageRouteInfo(build: routeBuilder, name: name, isInitial: true)
-
+      return PageRouteInfo(view: view, isInitial: true)
    }
 
-   var view: AnyView
-   let name: String
-   let isInitial: Bool
-   var args : Arguments?
-   let routeBuilder : ArgumentedBuilder
+
+
 
    var isHiddenBack : Bool {
       return isInitial

@@ -7,29 +7,44 @@
 
 import Foundation
 import StackNavigator
-
-struct Routes {
-
-   static let routes : [PageRouteInfo] = [
-      PageRouteInfo(build: { args in
-         ContentView()
-      }, name: RouteNames.viewOne.rawValue, isInitial: true),
-      PageRouteInfo(build: { args in 
-      return ViewTwo(id: args?["id"] as? String ?? "")
-      }, name: RouteNames.viewTwo.rawValue),
-      PageRouteInfo(build: { _ in
-         ViewThree()
-      }, name: RouteNames.viewThree.rawValue)
-
-   ]
+import SwiftUI
 
 
-   enum RouteNames : String, CaseIterable {
-      case viewOne = "one"
-      case viewTwo = "two"
-      case viewThree = "three"
+
+enum RouteNames : DeepRoutes {
+      case viewOne
+      case viewTwo(id : String)
+      case viewThree
+      case viewFour
+
+      func urlSchema() -> String {
+         switch self {
+            case .viewOne:
+              return  "/viewOne"
+            case .viewTwo(id: _):
+               return "/viewTwo"
+            case .viewThree:
+               return "/viewThree"
+            case .viewFour:
+               return "/viewFour"
+         }
+      }
+
+      func toItem() -> PageRouteInfo {
+         switch self {
+            case .viewOne:
+            return PageRouteInfo(view: ViewOne(), isInitial: true)
+            case .viewTwo(id: let id):
+            return PageRouteInfo(view: ViewTwo(id: id))
+            case .viewThree:
+            return PageRouteInfo(view:ViewThree())
+            case .viewFour:
+            return PageRouteInfo(view: ViewFour())
+         }
+      }
    }
 
-   
 
-}
+
+
+

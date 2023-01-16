@@ -12,7 +12,7 @@ import StackNavigator
 struct ExampleApp: App {
     var body: some Scene {
        WindowGroup {
-           AppBuilder(routes: Routes.routes)
+          AppBuilder(initial: RouteNames.viewOne.toItem())
         }
     }
 }

@@ -13,18 +13,18 @@ public typealias ArgumentedBuilder = (_ args : Arguments?) -> any View
 @available(macOS 13.0, *)
 public struct PageRouteInfo : Hashable {
 
-   let view: any View
+   let view: AnyView
    let isInitial: Bool
    let id : String = UUID().uuidString
    
 
    public init( view: any View) {
-      self.view = view
+      self.view = AnyView(view)
       self.isInitial = false
    }
 
    public init(view: any View, isInitial : Bool) {
-      self.view = view
+      self.view = AnyView(view)
       self.isInitial = isInitial
    }
 
@@ -37,13 +37,10 @@ public struct PageRouteInfo : Hashable {
       hasher.combine(id)
    }
 
-
-
    public mutating func makeFirst() -> PageRouteInfo {
       return PageRouteInfo(view: view, isInitial: true)
    }
 
-  
 }
 
 

@@ -16,11 +16,13 @@ struct ViewThree: View {
              Button("Push To 4") {
                 navManager.push(destionation: RouteNames.viewFour)
              }
-             Button("Replace root with 3") {
-                navManager.replaceRoot(with: RouteNames.viewThree)
+             Button("Replace root with 2") {
+                Task {
+                   await navManager.replaceRoot(with: RouteNames.viewFour)
+                }
              }
              Button("Push 4 and remove all") {
-                navManager.pushAndRemoveUntil(destionation: RouteNames.viewFour)
+              
              }
              Button("Pop back if possible") {
                 navManager.pop()

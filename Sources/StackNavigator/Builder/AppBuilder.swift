@@ -14,18 +14,22 @@ public struct AppBuilder: View {
    @ObservedObject var navigationHandler : NavigationHandler
 
    public init(initial: PageRouteInfo) {
-     navigationHandler = NavigationHandler(initial: initial)
+      navigationHandler = NavigationHandler(initial: initial.self)
    }
 
  public var body: some View {
     NavigationStack(path:$navigationHandler.stack) {
-      EmptyView()
+       ZStack {
+          ForEach(navigationHandler.singularStackRoute,id:\.self.id) { root in
+             root.view
+          }.transition(.asymmetric(insertion: .move(edge: .trailing), removal: .identity))
+       }
        .navigationDestination(for: PageRouteInfo.self) { routeInfo in
-          AnyView(routeInfo.view.transition(.asymmetric(insertion: .move(edge: .leading), removal: .identity)))
-             .navigationBarBackButtonHidden(routeInfo.isInitial )
-
+          AnyView(routeInfo.view)
        }
     }
     .environmentObject(navigationHandler)
    }
+
+
 }

@@ -29,6 +29,7 @@
 		4684D1982972C6CC0058DDE9 /* ViewTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTwo.swift; sourceTree = "<group>"; };
 		4684D19A2972C6DA0058DDE9 /* ViewThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewThree.swift; sourceTree = "<group>"; };
 		4684D19C2972C6FB0058DDE9 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
+		46B9477B29777A1500D6F4BB /* StackNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StackNavigator; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				4673CEE12974D81A004C4E74 /* StackNavigator */,
+				46B9477B29777A1500D6F4BB /* StackNavigator */,
 			);
 			name = Packages;
 			sourceTree = "<group>";

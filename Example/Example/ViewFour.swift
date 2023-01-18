@@ -14,13 +14,19 @@ struct ViewFour: View {
           Text("View 4")
           List {
              Button("Push To 1") {
-                navManager.push(destionation: RouteNames.viewOne)
+                Task {
+                   await navManager.push(destionation: RouteNames.viewOne)
+                }
              }
              Button("Replace root with 3") {
-                navManager.replaceRoot(with: RouteNames.viewThree)
+                Task {
+                   await navManager.replaceRoot(with: RouteNames.viewThree)
+                }
              }
              Button("Push 4 and remove all") {
-                navManager.pushAndRemoveUntil(destionation: RouteNames.viewFour)
+                Task {
+               
+                }
              }
              Button("Pop to Root") {
                 navManager.popToRoot()

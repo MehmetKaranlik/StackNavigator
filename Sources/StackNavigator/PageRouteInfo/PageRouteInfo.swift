@@ -34,7 +34,7 @@ public struct PageRouteInfo : Hashable {
    }
 
    public func hash(into hasher: inout Hasher) {
-      hasher.combine(id)
+      hasher.finalize()
    }
 
    public mutating func makeFirst() -> PageRouteInfo {

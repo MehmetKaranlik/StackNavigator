@@ -11,11 +11,7 @@ import SwiftUI
 @available(iOS 16.0, *)
 @available(macOS 13.0, *)
 public class NavigationHandler: Navigator {
-   @Published public var singularStackRoute: [PageRouteInfo] = [] {
-      didSet {
-         print(singularStackRoute.map({ "Name : \($0.view)" }))
-      }
-   }
+   @Published public var singularStackRoute: [PageRouteInfo] = []
    @Published public var stack: [PageRouteInfo] = []
 
    public init(initial: PageRouteInfo) {
@@ -27,22 +23,28 @@ public class NavigationHandler: Navigator {
    }
 
    public func pop() {
-      if isNotLast {
-         stack.removeLast()
-      }
+      stack.removeLast()
    }
 
    public func popToRoot() {
       if isNotLast {
-         stack.removeLast((1 ... stack.count - 1).count)
+         stack.removeAll()
+      }
+   }
+
+   public func popTo(_ to : any DeepRoutes){
+      stack.removeAll { route in
+         route.hashValue != to.toItem().hashValue
       }
    }
 
    public func replaceRoot(with: any DeepRoutes) {
-      var route = with.toItem()
-      withAnimation {
+      let route = with.toItem()
+      withAnimation(.linear(duration: 0.35)) {
          self.singularStackRoute.append(route)
-         self.singularStackRoute.remove(at: 0)
+         withDelay {
+            self.singularStackRoute.remove(at: 0)
+         }
       }
    }
 }
@@ -55,7 +57,7 @@ private extension NavigationHandler {
 
 private extension NavigationHandler {
    func withDelay(_ callback: @escaping () -> ()) {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
          callback()
       }
    }

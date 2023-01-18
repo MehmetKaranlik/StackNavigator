@@ -23,13 +23,15 @@ public class NavigationHandler: Navigator {
    }
 
    public func pop() {
-      stack.removeLast()
+      if isNotEmpy {
+         stack.removeLast()
+      }
    }
 
    public func popToRoot() {
-      if isNotLast {
+
          stack.removeAll()
-      }
+
    }
 
    public func popTo(_ to : any DeepRoutes){
@@ -50,8 +52,8 @@ public class NavigationHandler: Navigator {
 }
 
 private extension NavigationHandler {
-   var isNotLast: Bool {
-      return stack.count > 1
+   var isNotEmpy: Bool {
+      return !stack.isEmpty
    }
 }
 

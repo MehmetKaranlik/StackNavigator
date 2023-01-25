@@ -15,6 +15,8 @@ public protocol DeepRoutes : Hashable, Equatable  {
    func toItem() ->  PageRouteInfo
 }
 
+@available(iOS 16.0.0, *)
+@available(macOS 13.0.0, *)
 extension DeepRoutes {
    static func == (lhs: any DeepRoutes, rhs: any DeepRoutes) -> Bool {
       lhs.hashValue == rhs.hashValue

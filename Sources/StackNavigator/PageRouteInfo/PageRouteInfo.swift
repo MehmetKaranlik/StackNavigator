@@ -10,7 +10,8 @@ import SwiftUI
 public typealias Arguments = [String:Any?]
 public typealias ArgumentedBuilder = (_ args : Arguments?) -> any View
 
-@available(macOS 13.0, *)
+@available(iOS 16.0.0, *)
+@available(macOS 13.0.0, *)
 public struct PageRouteInfo : Hashable {
 
    let view: AnyView

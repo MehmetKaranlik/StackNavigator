@@ -7,27 +7,23 @@
 
 import SwiftUI
 
-
-
 @available(iOS 16.0.0, *)
 @available(macOS 13.0.0, *)
-public struct PageRouteInfo : Hashable {
-
-   let view: AnyView
-   let isInitial: Bool
-   let id : String = UUID().uuidString
+public struct PageRouteInfo: Hashable {
    
+   public let view: AnyView
+   public let isInitial: Bool
+   public let id: String = UUID().uuidString
 
-   public init( view: any View) {
+   public init(view: any View) {
       self.view = AnyView(view)
       self.isInitial = false
    }
 
-   public init(view: any View, isInitial : Bool) {
+   public init(view: any View, isInitial: Bool) {
       self.view = AnyView(view)
       self.isInitial = isInitial
    }
-
 
    public static func == (lhs: PageRouteInfo, rhs: PageRouteInfo) -> Bool {
       lhs.hashValue == rhs.hashValue
@@ -40,8 +36,4 @@ public struct PageRouteInfo : Hashable {
    public mutating func makeFirst() -> PageRouteInfo {
       return PageRouteInfo(view: view, isInitial: true)
    }
-
 }
-
-
-
